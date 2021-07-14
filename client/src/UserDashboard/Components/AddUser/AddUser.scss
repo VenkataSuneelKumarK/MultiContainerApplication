@@ -1,0 +1,19 @@
+.userdashboard-form {
+    border: 3px solid lightblue;
+    border-radius: 5px;
+    padding: 1rem;
+
+    .labelWithInput {
+        display: flex;
+        margin-bottom: 1rem;
+
+        label {
+            width: 35%;
+        }
+    }
+
+    button {
+        position: relative;
+        left: 40%;
+    }
+}
