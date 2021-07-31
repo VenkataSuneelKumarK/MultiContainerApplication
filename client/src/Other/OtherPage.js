@@ -1,4 +1,5 @@
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const OtherPage = () => {
     const [count, setCount] = useState(0);
     const [obj, setObj] = useState({ a: 0, b: 10 });
@@ -15,7 +16,7 @@ const OtherPage = () => {
     return (
         <div>
             <Example />
-            Welcome to other page
+      Welcome to other page
             <div>Count {count}</div>
             <div>{obj.a}</div>
             <div>{obj.b}</div>
@@ -64,7 +65,7 @@ class Example extends React.Component {
         </button>
             </div>
         );
-}
+    }
 }
 
 export default OtherPage;
