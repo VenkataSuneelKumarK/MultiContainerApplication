@@ -11,7 +11,9 @@ function UserDashboard() {
     };
     return (
         <>
-            <h3>User Dashboard</h3>
+            <header>
+                <h3>User Dashboard</h3>
+            </header>
             <AddUser onAddUser={addUserHandler} />
             <UsersList users={users} />
         </>

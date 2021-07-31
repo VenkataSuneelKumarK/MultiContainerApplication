@@ -9,11 +9,11 @@ function App() {
     return (
         <Router>
             <div className="kvs">
-                <header className="">KVS</header>
+                <header className="kvs-header">KVS</header>
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">Home</Link>
+                            <Link to="/">Fibonacci</Link>
                         </li>
                         <li>
                             <Link to="/otherpage">Other Page</Link>
