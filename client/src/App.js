@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import OtherPage from "./Other/OtherPage";
@@ -23,17 +23,19 @@ function App() {
                         </li>
                     </ul>
                 </nav>
-                <Routes>
-                    <Route path="/otherpage">
-                        <OtherPage />
-                    </Route>
-                    <Route path="/userdashboard">
-                        <UserDashboard />
-                    </Route>
-                    <Route path="/">
-                        <Fibonacci />
-                    </Route>
-                </Routes>
+                <main>
+                    <Routes>
+                        <Route path="/otherpage">
+                            <OtherPage />
+                        </Route>
+                        <Route path="/userdashboard">
+                            <UserDashboard />
+                        </Route>
+                        <Route path="/">
+                            <Fibonacci />
+                        </Route>
+                    </Routes>
+                </main>
             </div>
         </Router>
     );

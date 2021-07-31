@@ -11,9 +11,30 @@
         border-radius: 0rem 0rem 1rem 1rem;
     }
 
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
     ul {
         list-style: none;
         display: flex;
-        background: lightgreen;
+        min-height: 2rem;
+        align-items: center;
+
+        li {
+            margin: 1rem;
+            border: 2px solid green;
+            padding: 4px 1rem;
+            border-radius: 5px;
+            font-style: italic;
+            box-shadow: 1px 3px 4px #008000d6;
+
+            a {
+                text-decoration: none;
+            }
+        }
     }
 }
