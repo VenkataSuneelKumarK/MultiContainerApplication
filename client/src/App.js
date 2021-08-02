@@ -29,7 +29,6 @@ function App() {
     return (
         <Router>
             <div className="kvs">
-                {isLoggedIn}
                 <MainHeader isLoggedIn={isLoggedIn} onLogout={logOutHandler} />
                 {isLoggedIn ? (
                     <>
@@ -61,7 +60,9 @@ function App() {
                         </main>
                     </>
                 ) : (
-                        <Login onLogin={loginHandler}>Please login</Login>
+                        <main>
+                            <Login onLogin={loginHandler}>Please login</Login>
+                        </main>
                     )}
             </div>
         </Router>
