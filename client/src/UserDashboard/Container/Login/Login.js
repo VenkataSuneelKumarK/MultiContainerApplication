@@ -36,16 +36,16 @@ const Login = props => {
     });
 
     /* runs always
-                              * useEffect(() => {
-                                  console.log("useEffect::valid");
-                                  setIsValid(userName.includes("@") && userPassword.length > 7);
-                              });*/
+                                  * useEffect(() => {
+                                      console.log("useEffect::valid");
+                                      setIsValid(userName.includes("@") && userPassword.length > 7);
+                                  });*/
 
     /* with empty array, its only didmount
-                              * useEffect(() => {
-                                  console.log("useEffect::valid");
-                                  setIsValid(userName.includes("@") && userPassword.length > 7);
-                              }, []);*/
+                                  * useEffect(() => {
+                                      console.log("useEffect::valid");
+                                      setIsValid(userName.includes("@") && userPassword.length > 7);
+                                  }, []);*/
 
     // runs only [userName, userPassword] changes with properties in array
     // same as prevProps or prevState inside componentDidUpdate
@@ -132,7 +132,7 @@ const Login = props => {
                         onBlurHandler={onBlurPasswordHandler}
                     />
 
-                    <Button type="submit" disable={isValid}>
+                    <Button type="submit" disable={!isValid}>
                         <span>Login</span>
                     </Button>
                 </form>
