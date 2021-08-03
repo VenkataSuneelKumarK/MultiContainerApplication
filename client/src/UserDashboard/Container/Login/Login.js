@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import Card from "../../Components/UI/Card";
 import Button from "../../Components/UI/Button/Button";
 import Modal from "../../Components/UI/Modal/Modal";
 import classes from "./Login.module.scss";
+import AuthContext from "../../Store/auth-context";
 
 const userNameReducer = (state, action) => {
     if (action.type === "USER_INPUT") {
@@ -13,6 +14,7 @@ const userNameReducer = (state, action) => {
     return state;
 };
 const Login = props => {
+    const ctx = useContext(AuthContext);
     //const [userName, setUserName] = useState("");
     //const [isUserNameValid, setUserNameValid] = useState();
     const [userPassword, setUserPassword] = useState("");
@@ -26,16 +28,16 @@ const Login = props => {
     });
 
     /* runs always
-      * useEffect(() => {
-          console.log("useEffect::valid");
-          setIsValid(userName.includes("@") && userPassword.length > 7);
-      });*/
+        * useEffect(() => {
+            console.log("useEffect::valid");
+            setIsValid(userName.includes("@") && userPassword.length > 7);
+        });*/
 
     /* with empty array, its only didmount
-      * useEffect(() => {
-          console.log("useEffect::valid");
-          setIsValid(userName.includes("@") && userPassword.length > 7);
-      }, []);*/
+        * useEffect(() => {
+            console.log("useEffect::valid");
+            setIsValid(userName.includes("@") && userPassword.length > 7);
+        }, []);*/
 
     // runs only [userName, userPassword] changes with properties in array
     // same as prevProps or prevState inside componentDidUpdate
@@ -77,7 +79,7 @@ const Login = props => {
     };
     const loginHandler = event => {
         event.preventDefault();
-        props.onLogin(userNameState.value, userPassword);
+        ctx.onLogin(userNameState.value, userPassword);
         console.log("login");
     };
     const onClose = event => {

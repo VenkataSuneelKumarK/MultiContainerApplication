@@ -1,36 +1,21 @@
 import "./App.scss";
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import OtherPage from "./Other/OtherPage";
 import Fibonacci from "./Fibonacci/Fibonacci";
 import UserDashboard from "./UserDashboard/Container/UserDashboard";
 import MainHeader from "./UserDashboard/Components/MainHeader/MainHeader";
 import Login from "./UserDashboard/Container/Login/Login";
+import AuthContext from "./UserDashboard/Store/auth-context";
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const ctx = useContext(AuthContext);
 
-    useEffect(() => {
-        const storedUserInfo = localStorage.getItem("isLoggedIn");
-        if (storedUserInfo === "1") {
-            setIsLoggedIn(true);
-        }
-    }, []);
-
-    const loginHandler = (email, password) => {
-        localStorage.setItem("isLoggedIn", "1");
-        setIsLoggedIn(true);
-    };
-
-    const logOutHandler = (email, password) => {
-        localStorage.setItem("isLoggedIn", "0");
-        setIsLoggedIn(false);
-    };
     return (
         <Router>
             <div className="kvs">
-                <MainHeader isLoggedIn={isLoggedIn} onLogout={logOutHandler} />
-                {isLoggedIn ? (
+                <MainHeader />
+                {ctx.isLoggedIn ? (
                     <>
                         <nav>
                             <ul>
@@ -61,7 +46,7 @@ function App() {
                     </>
                 ) : (
                         <main>
-                            <Login onLogin={loginHandler}>Please login</Login>
+                            <Login>Please login</Login>
                         </main>
                     )}
             </div>
