@@ -1,9 +1,15 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {
+    useContext,
+    useEffect,
+    useReducer,
+    useState,
+    useRef
+} from "react";
 import Card from "../../Components/UI/Card";
 import Button from "../../Components/UI/Button/Button";
 import Modal from "../../Components/UI/Modal/Modal";
-import classes from "./Login.module.scss";
 import AuthContext from "../../Store/auth-context";
+import InputWithLabel from "../../Components/UI/InputWithLabel/InputWithLabel";
 
 const userNameReducer = (state, action) => {
     if (action.type === "USER_INPUT") {
@@ -15,6 +21,8 @@ const userNameReducer = (state, action) => {
 };
 const Login = props => {
     const ctx = useContext(AuthContext);
+    const userNameRef = useRef();
+    const passwordRef = useRef();
     //const [userName, setUserName] = useState("");
     //const [isUserNameValid, setUserNameValid] = useState();
     const [userPassword, setUserPassword] = useState("");
@@ -28,16 +36,16 @@ const Login = props => {
     });
 
     /* runs always
-        * useEffect(() => {
-            console.log("useEffect::valid");
-            setIsValid(userName.includes("@") && userPassword.length > 7);
-        });*/
+                              * useEffect(() => {
+                                  console.log("useEffect::valid");
+                                  setIsValid(userName.includes("@") && userPassword.length > 7);
+                              });*/
 
     /* with empty array, its only didmount
-        * useEffect(() => {
-            console.log("useEffect::valid");
-            setIsValid(userName.includes("@") && userPassword.length > 7);
-        }, []);*/
+                              * useEffect(() => {
+                                  console.log("useEffect::valid");
+                                  setIsValid(userName.includes("@") && userPassword.length > 7);
+                              }, []);*/
 
     // runs only [userName, userPassword] changes with properties in array
     // same as prevProps or prevState inside componentDidUpdate
@@ -79,8 +87,14 @@ const Login = props => {
     };
     const loginHandler = event => {
         event.preventDefault();
-        ctx.onLogin(userNameState.value, userPassword);
-        console.log("login");
+        if (!userNameState.isValid) {
+            userNameRef.current.focus();
+        } else if (!isUserPasswordValid) {
+            passwordRef.current.focus();
+        } else {
+            ctx.onLogin(userNameState.value, userPassword);
+            console.log("login");
+        }
     };
     const onClose = event => {
         setError();
@@ -97,35 +111,28 @@ const Login = props => {
             )}
             <Card>
                 <form className="userdashboard-form" onSubmit={loginHandler}>
-                    <div
-                        className={`labelWithInput ${userNameState.isValid === false ? classes.invalid : ""
-                            }`}
-                    >
-                        <label htmlFor="username">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={userNameState.value}
-                            onChange={setUserNameHandler}
-                            onBlur={onBlurNameHandler}
-                        />
-                    </div>
-                    <div
-                        className={`${isUserPasswordValid === false ? classes.invalid : ""
-                            }`}
-                    >
-                        <div className="labelWithInput">
-                            <label htmlFor="password">password</label>
-                            <input
-                                type="password"
-                                id="password"
-                                value={userPassword}
-                                onChange={setUserPasswordHandler}
-                                onBlur={onBlurPasswordHandler}
-                            />
-                        </div>
-                    </div>
-                    <Button type="submit" disable={!isValid}>
+                    <InputWithLabel
+                        ref={userNameRef}
+                        isValid={userNameState.isValid}
+                        label="Username"
+                        type="text"
+                        id="username"
+                        value={userNameState.value}
+                        onChangeHandler={setUserNameHandler}
+                        onBlurHandler={onBlurNameHandler}
+                    />
+                    <InputWithLabel
+                        ref={passwordRef}
+                        isValid={isUserPasswordValid}
+                        label="Password"
+                        type="password"
+                        id="password"
+                        value={userPassword}
+                        onChangeHandler={setUserPasswordHandler}
+                        onBlurHandler={onBlurPasswordHandler}
+                    />
+
+                    <Button type="submit" disable={isValid}>
                         <span>Login</span>
                     </Button>
                 </form>
